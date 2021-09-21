@@ -6,6 +6,43 @@ const numValue = ["1","2","3","4","5","6","7","8","9","0"]
 const specChar = ["!","@","#","$","%","^","&","*","(",")"]
 
 // Write password to the #password input
+function generatePassword(){
+  const numChars = prompt("How many characters in your password?");
+    if (numChars < 8 || numChars > 128){
+      alert("Password must be between 8 and 128 characters.");
+      return "Please try again.";
+  }
+  
+  const isLowerCase = confirm("Do you want to use Lower Case?");
+  const isUpperCase = confirm("Do you want to use Upper Case?");
+  const isNum = confirm("Do you want Numbers?");
+  const isSpec = confirm("Do you want Special Characters?");
+
+  if (!isLowerCase && !isUpperCase && !isNum && !isSpec){
+    alert("Please select at least one of these options.");
+    return "Please try again.";
+  }
+
+  var options = [];
+  var password = "";
+
+  if (isLowerCase) options = options.concat(lowerCase);
+  if (isUpperCase) options = options.concat(upperCase);
+  if (isNum) options = options.concat(numValue);
+  if (isSpec) options = options.concat(specChar);
+  
+  for (var i = 0; i < numChars; i++){
+    const index = Math.floor(Math.random() * (options.length - 1));
+    password = password.concat(options[index]);
+  }
+
+  return password;
+
+
+}
+
+
+
 function writePassword() {
   var password = generatePassword();
   var passwordText = document.querySelector("#password");
