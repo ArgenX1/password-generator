@@ -24,21 +24,53 @@ function generatePassword(){
   }
 
   var options = [];
-  var password = "";
+  var password = [];
+  var requiredChar = [];
 
-  if (isLowerCase) options = options.concat(lowerCase);
-  if (isUpperCase) options = options.concat(upperCase);
-  if (isNum) options = options.concat(numValue);
-  if (isSpec) options = options.concat(specChar);
-  
-  for (var i = 0; i < numChars; i++){
-    const index = Math.floor(Math.random() * (options.length - 1));
-    password = password.concat(options[index]);
+
+  //fills arrays with desired options//
+  if (isLowerCase){
+    options = options.concat(lowerCase);
+    requiredChar.push(getRandom(lowerCase));
   }
+  if (isUpperCase){
+    options = options.concat(upperCase);
+    requiredChar.push(getRandom(upperCase));
+  }
+  if (isNum){
+    options = options.concat(numValue);
+    requiredChar.push(getRandom(numValue));
+  }
+  if (isSpec){
+    options = options.concat(specChar);
+    requiredChar.push(getRandom(specChar));
+  }
+
+
+  //fills password array with random characters from options array minus the amount of required character criteria selected//
+  for (var i = 0; i < numChars - requiredChar.length; i++){
+    password.push(getRandom(options));
+  }
+
+  // picks a random spot in the password array to place the required characters in //
+  for (var i = 0; i < numChars; i++){
+    const index = Math.floor(Math.random() * password.length);
+    password.splice(index, 0, requiredChar[i]);
+  }
+
+  //turing password array into string//
+  password = password.join("");
 
   return password;
 
 
+}
+
+
+//function to not write the for loop math out every time//
+function getRandom(array){
+  const index = Math.floor(Math.random() * array.length);
+  return array[index];
 }
 
 
