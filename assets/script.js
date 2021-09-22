@@ -6,6 +6,8 @@ const numValue = ["1","2","3","4","5","6","7","8","9","0"]
 const specChar = ["!","@","#","$","%","^","&","*","(",")"]
 
 // Write password to the #password input
+
+//prompts for password criteria//
 function generatePassword(){
   const numChars = prompt("How many characters in your password?");
     if (numChars < 8 || numChars > 128){
@@ -23,6 +25,7 @@ function generatePassword(){
     return "Please try again.";
   }
 
+  //arrays to be filled and pushed//
   var options = [];
   var password = [];
   var requiredChar = [];
