@@ -10,7 +10,7 @@ const specChar = ["!","@","#","$","%","^","&","*","(",")"]
 //prompts for password criteria//
 function generatePassword(){
   const numChars = prompt("How many characters in your password?");
-    if (numChars < 8 || numChars > 128){
+    if (numChars < 8 || numChars > 128 || !Number.isInteger(numChars)){
       alert("Password must be between 8 and 128 characters.");
       return "Please try again.";
   }
